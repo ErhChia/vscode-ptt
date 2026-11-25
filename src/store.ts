@@ -82,7 +82,16 @@ class ArticleStore {
     if (list.length === 0) {
       return 0;
     }
-    return list[list.length - 1].sn;
+    let sliced = [];
+    if (list.length <= 20) {
+      sliced = list;
+    } else {
+      sliced = list.slice(-20);
+    }
+    if ((sliced[0].sn - sliced[sliced.length-1].sn) >= 20) {
+      return sliced[0].sn - 19;
+    }
+    return sliced[sliced.length - 1].sn;
   }
 
   minSn(boardname: string): number {
